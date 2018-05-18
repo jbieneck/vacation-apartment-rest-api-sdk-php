@@ -15,12 +15,12 @@ class Utility {
      * @return array
      */
     function getConfig($section = null, $key = null) {
-        if (defined('CONFIG_PATH')) {
-            $configFile = constant('CONFIG_PATH') . '/sdk_config.ini';
+        if (defined('VA_CONFIG_PATH')) {
+            $configFile = constant('VA_CONFIG_PATH') . '/sdk-config.ini';
         } else {
             $configFile = implode(
                 DIRECTORY_SEPARATOR,
-                array(dirname(__FILE__), "../../../../../../", "config", "sdk_config.ini")
+                array(dirname(__FILE__), "../../../../../../", "config", "sdk-config.ini")
             );
         }
 
