@@ -49,7 +49,7 @@ class Bootstrap
      */
     public static function pharAutoload($classname)
     {
-        self::_autoload('phar://vacation-apartments.phar', $classname);
+        self::_autoload('phar://vacationapartments.phar', $classname);
     }
 
     /**
