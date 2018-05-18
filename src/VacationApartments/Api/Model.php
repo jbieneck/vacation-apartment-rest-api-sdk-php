@@ -18,7 +18,7 @@ abstract class Model {
     public function create($resourceId = null) {
 
         $this->resourceId = $resourceId;
-        $body = $this->toJson();
+        $body             = $this->toJson();
         return $this->post($body);
     }
 
@@ -44,7 +44,7 @@ abstract class Model {
      * @param $body
      * @return mixed
      */
-    private function post($body){
+    private function post($body) {
         $utility   = new Utility();
         $apiParams = $utility->getConfig("apiParameters");
 
@@ -74,17 +74,16 @@ abstract class Model {
     /**
      * @return Model $this
      */
-    private function execute(){
+    private function execute() {
         $utility   = new Utility();
         $apiParams = $utility->getConfig("apiParameters");
 
         $basicAuthString = 'Basic ' . base64_encode($apiParams['username'] . ":" . $apiParams['password']);
-        $uri = $apiParams['endpoint'] . '/'. $this->getResourceName();
+        $uri             = $apiParams['endpoint'] . '/' . $this->getResourceName();
         if (!is_null($this->resourceId)) {
-            $uri = $uri .'/'. $this->resourceId;
+            $uri = $uri . '/' . $this->resourceId;
         }
-        var_dump($uri);
-        $response        = Request::get($uri)
+        $response = Request::get($uri)
             ->addHeaders(
                 array(
                     'Authorization' => $basicAuthString,
@@ -93,15 +92,13 @@ abstract class Model {
             )
             ->send();
 
-        if($response->hasErrors()) {
-            var_dump($response->raw_body);
+        if ($response->hasErrors()) {
             die('found errors');
         }
         $this->fromJson(json_decode($response));
 
         // TODO: handle unexpected response (logging?)
         return $this;
-
     }
 
     /**
@@ -114,7 +111,6 @@ abstract class Model {
      */
     private function fromJson($data) {
 
-        var_dump($data);
         $vars = get_object_vars($data);
         // TODO: map whole depth of the object
         foreach ($vars as $key => $value) {
@@ -127,10 +123,10 @@ abstract class Model {
      * @return string $body
      */
     private function toJson() {
-        $vars = get_object_vars($this);
+        $vars  = get_object_vars($this);
         $props = array();
         foreach ($vars as $key => $value) {
-            $property        = Utility::camelCaseToUnderscore($key);
+            $property         = Utility::camelCaseToUnderscore($key);
             $props[$property] = $value;
         }
         return $props;
