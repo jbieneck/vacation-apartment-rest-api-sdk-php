@@ -20,7 +20,7 @@ class Utility {
         } else {
             $configFile = implode(
                 DIRECTORY_SEPARATOR,
-                array(dirname(__FILE__), "../../../../", "config", "sdk_config.ini")
+                array(dirname(__FILE__), "../../../../../../", "config", "sdk_config.ini")
             );
         }
 
