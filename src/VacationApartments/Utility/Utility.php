@@ -3,7 +3,7 @@ namespace VacationApartments\Utility;
 
 class Utility {
 
-    function doDefine($constant, $value) {
+    public static function doDefine($constant, $value) {
         if (!defined($constant)) {
             define($constant, $value);
         }
@@ -14,7 +14,7 @@ class Utility {
      * @param string $key
      * @return array
      */
-    function getConfig($section = null, $key = null) {
+    public static function getConfig($section = null, $key = null) {
         if (defined('VA_CONFIG_PATH')) {
             $configFile = constant('VA_CONFIG_PATH') . '/sdk-config.ini';
         } else {
