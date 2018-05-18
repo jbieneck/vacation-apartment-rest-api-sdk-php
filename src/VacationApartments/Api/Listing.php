@@ -1,162 +1,112 @@
 <?php
 namespace VacationApartments\Api;
 
-use Httpful\Request;
-use VacationApartments\Exception\OperationNotImplementedException;
-use VacationApartments\Utility\Utility;
-
 /**
- * Class Customer
- * creates and patches customers
+ * Class Listing
+ * retrieves, creates and patches listings
  *
  * @package VacationApartments\API
  */
-class Listing {
+class Listing extends Model {
 
-    const RESOURCE = "/listing/";
+    /** @var int */
+    protected $maxPersons;
+    /** @var int */
+    protected $accessibilityId;
+    /** @var int */
+    protected $size;
+    /** @var string (Format: Y-m-d) */
+    protected $classificationExpireDate;
+    /** @var int */
+    protected $classificationStarId;
+    /** @var int */
+    protected $objectTypeId;
 
-    private $maxPersons;
-    private $accessibilityId;
-    private $size;
-    private $classificationExpireDate;
-    private $classificationStarId;
-    private $objectTypeId;
 
-
-    function dashesToCamelCase($string, $capitalizeFirstCharacter = false)
-    {
-
-        $str = str_replace('_', '', ucwords($string, '_'));
-
-        if (!$capitalizeFirstCharacter) {
-            $str = lcfirst($str);
-        }
-
-        return $str;
+    protected function getResourceName() {
+        return "listing";
     }
 
     /**
-     * TODO: create ApiModel and move common stuff there
-     * @param $data
+     * @return int
      */
-    protected function mapResponse($data){
-        foreach($data as $key => $value){
-            $property = $this->dashesToCamelCase($key);
-            $this->$property = $value;
-        }
-    }
-
-    public function get($listingId) {
-
-        $utility   = new Utility();
-        $apiParams = $utility->getConfig("apiParameters");
-
-        // $basic_auth_sting = 'Basic ' . base64_encode($your_email . ':' . $your_password); => see keepass file for password
-        $basicAuthString = 'Basic ' . base64_encode($apiParams['accountEmail'] . ":" . $apiParams['accountPassword']);
-        $response        = Request::get($apiParams['url'] . self::RESOURCE . $listingId)
-            ->addHeaders(
-                array(
-                    'Authorization' => $basicAuthString,
-                    'Content-Type'  => 'application/vnd.listing.' . $apiParams['version'] . '+json',
-                )
-            )
-            ->send();
-        $this->mapResponse(json_decode($response));
-
-        // TODO: set response values into fields and create getters/setters for them, then return $this (Customer)
-        // TODO: handle unexptected response (logging?)
-        return $this;
-    }
-
-
-    /**
-     * @param $customerId
-     * @param $username
-     * @throws
-     */
-    public static function patch($customerId, $username) {
-        throw new OperationNotImplementedException('not yet implemented');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getMaxPersons(){
+    public function getMaxPersons() {
         return $this->maxPersons;
     }
 
     /**
-     * @param mixed $maxPersons
+     * @param int $maxPersons
      */
     public function setMaxPersons($maxPersons) {
         $this->maxPersons = $maxPersons;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getAccessibilityId() {
         return $this->accessibilityId;
     }
 
     /**
-     * @param mixed $accessibilityId
+     * @param int $accessibilityId
      */
     public function setAccessibilityId($accessibilityId) {
         $this->accessibilityId = $accessibilityId;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getSize() {
         return $this->size;
     }
 
     /**
-     * @param mixed $size
+     * @param int $size
      */
     public function setSize($size) {
         $this->size = $size;
     }
 
     /**
-     * @return mixed
+     * @return string (Format: Y-m-d)
      */
     public function getClassificationExpireDate() {
         return $this->classificationExpireDate;
     }
 
     /**
-     * @param mixed $classificationExpireDate
+     * (Format: Y-m-d)
+     * @param string $classificationExpireDate
      */
     public function setClassificationExpireDate($classificationExpireDate) {
         $this->classificationExpireDate = $classificationExpireDate;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getClassificationStarId() {
         return $this->classificationStarId;
     }
 
     /**
-     * @param mixed $classificationStarId
+     * @param int $classificationStarId
      */
     public function setClassificationStarId($classificationStarId) {
         $this->classificationStarId = $classificationStarId;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getObjectTypeId() {
         return $this->objectTypeId;
     }
 
     /**
-     * @param mixed $objectTypeId
+     * @param int $objectTypeId
      */
     public function setObjectTypeId($objectTypeId) {
         $this->objectTypeId = $objectTypeId;

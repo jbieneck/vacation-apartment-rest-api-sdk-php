@@ -9,7 +9,7 @@ const VA_LISTING_ID = "225387";
 /**
  * @return mixed
  */
-function getData() {
+function getListing() {
 
     $listing = new Listing();
     $listing = $listing->get(VA_LISTING_ID);
@@ -18,5 +18,5 @@ function getData() {
 }
 
 
-$data = getData();
+$data = getListing();
 var_dump($data);
