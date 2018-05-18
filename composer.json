@@ -1,8 +1,16 @@
 {
-    "name": "holiday-home-elisabeth/homepage",
-    "description": "Ferienhaus Elisabeth",
-    "type": "project",
+    "name": "jbieneck/vacation-apartments-rest-api-sdk-php",
+    "description": "REST API SDK PHP for https://traum-ferienwohnungen.de",
+    "homepage": "https://api.traum-ferienwohnungen.de",
+    "type": "library",
     "license": "proprietary",
+    "keywords": [ ],
+    "authors": [
+        {
+            "name": "Janet Bieneck",
+            "email": "fewo.elisabeth@gmail.com"
+        }
+    ],
     "require": {
         "nategood/httpful": "*"
     }
