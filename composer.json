@@ -11,6 +11,9 @@
             "email": "fewo.elisabeth@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-0": {"VacationApartments": "src/"}
+    },
     "require": {
         "nategood/httpful": "*"
     }
