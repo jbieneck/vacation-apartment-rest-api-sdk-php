@@ -1,0 +1,9 @@
+{
+    "name": "holiday-home-elisabeth/homepage",
+    "description": "Ferienhaus Elisabeth",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "nategood/httpful": "*"
+    }
+}
